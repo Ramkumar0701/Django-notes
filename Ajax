@@ -1,3 +1,28 @@
+Normal Ajax Call
+
+$.ajax({
+                    type: 'POST',
+                    url: '{% url "send_whatsapp_message_view" %}',
+                    data: {
+                        'lead_id': selectedLeadIds,
+                        'category_id': category_id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',  // Django template tag to include CSRF token
+                        // Add more data as needed
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        // $('#id_to_hide').hide();
+                        Swal.fire(response.message);
+                    },
+                    // error: function (error) {
+                    //     Swal.fire(error.message);
+                    // }
+                });
+
+
+
+
+
 AJAX get value for text field
 
 
