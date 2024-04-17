@@ -1,0 +1,143 @@
+Install python
+Install IDE
+Create Virtual environment
+Activate Virtual environment
+Create project inside virtual environment
+Migrate the project
+Run the project
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Windows
+
+virtual environment         ->  python -m venv venv
+Activate Venv               ->  venv Scripts/activate
+Install django              ->  django-admin startproject projectname
+create App                  ->  python manage.py startapp appname
+To get models               ->  python manage.py inspectdb
+
+
+
+GetReady to update changes  ->  python manage.py makemigrations 
+Migrate project             ->  python manage.py migrate
+Run Project                 ->  python manage.py runserver
+
+
+To prepare requirements    ->   pip freeze > requirements.txt
+To install requirement      ->  pip install -r requirements.txt
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+PORT : http://127.0.0.1:8000/  ( localhost )
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+To Create App
+
+cd project path -  python manage.py startapp appname
+add the appname in settings.py file
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Views.py
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import *
+
+
+def index(request):
+    return render(request, 'index.html')
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Main Urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('admin_page.urls')),  # Include the app's URLs
+    # Add more URL patterns as needed
+]
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+App Urls.py
+
+
+
+from django.urls import path
+from .views import *  # Import your views
+
+urlpatterns = [
+    path('index/',index, name='index'),
+]
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Database in settings.py
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'your_database_name',
+        'USER': 'your_database_user',
+        'PASSWORD': 'your_database_password',
+        'HOST': 'localhost',  # Set to the appropriate host
+        'PORT': '5432',       # Set to the appropriate port
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ORM FOR DB ACTIVITIES
+
+Retrieve all records                        ->   all_objects = modelname.objects.all()
+Retrieve a single record by primary key     ->   single_object = modelname.objects.get(pk=1)
+Filter records based on conditions          ->   filtered_objects = modelname.objects.filter(name__icontains='keyword')
+To insert record in table                   ->   new_object = modelname.objects.create(name='New Name', description='New Description')
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+To update
+
+
+object_to_update = MyModel.objects.get(pk=1)
+
+# Update fields
+object_to_update.name = 'Updated Name'
+object_to_update.description = 'Updated Description'
+
+# Save the changes
+object_to_update.save()
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+To delete
+
+# Retrieve an object to delete
+object_to_delete = MyModel.objects.get(pk=1)
+
+# Delete the object
+object_to_delete.delete()
+
+djangify -d admin_page/templates/index
