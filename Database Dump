@@ -1,0 +1,6 @@
+C:\xampp\mysql\bin>   mysqldump -u root -p 1234 C:\Users\Admin\Desktop\crm_db_dump.sql
+C:\xampp\mysql\bin>   mysqldump -u root -p > C:\Users\Admin\Desktop\crm_db.sql
+
+C:\xampp\mysql\bin>                      -------> from where our database is stored
+mysqldump -u root -p 1234                -----------> command, username and password
+C:\Users\Admin\Desktop\crm_db_dump.sql   -------> from where the file to be stored
