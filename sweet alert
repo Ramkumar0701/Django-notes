@@ -1,0 +1,13 @@
+Processing please wait
+Sweet alert
+
+
+Swal.fire({
+        title: 'Please wait...',
+        html: 'Processing your request',
+        allowOutsideClick: false,
+        showConfirmButton: false, // Remove the "OK" button
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        }
+      });
