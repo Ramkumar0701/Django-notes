@@ -1,0 +1,43 @@
+API
+serializers.py
+
+
+from rest_framework import serializers
+from .models import Leadcreation
+
+
+class LeadCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Leadcreation
+        fields = '__all__'  
+
+
+
+views.py
+
+
+// To fetch all data in JSON format
+
+class LeadCategoryAPIView(APIView):
+    def get(self, request):
+        lead_categories = Leadcreation.objects.all()
+        serializer = LeadCategorySerializer(lead_categories, many=True)
+        return Response(serializer.data)    
+
+// To fetch single record in JSON format
+    
+class LeadCategory_singlerecord(APIView):
+    def get(self, request, phone_number):
+        lead_category = Leadcreation.objects.filter(phone_no=phone_number).first()
+        serializer = LeadCategorySerializer(lead_category)
+        return Response(serializer.data)
+
+
+
+
+urls.py
+
+
+path('api/lead-categories/', LeadCategoryAPIView.as_view(), name='LeadCategoryAPIView'),
+path('api/lead/<str:phone_number>/', LeadCategory_singlerecord.as_view(), name='lead_single_record'),
+
