@@ -1,7 +1,6 @@
 Processing please wait
 Sweet alert
 
-
 Swal.fire({
         title: 'Please wait...',
         html: 'Processing your request',
@@ -11,3 +10,23 @@ Swal.fire({
           Swal.showLoading();
         }
       });
+
+
+
+Get confirmation from user before do some operATION|
+
+Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this lead!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+            }).then((result) => {
+                // If user confirms deletion
+                if (result.isConfirmed) {
+                    // Send AJAX request to delete the lead
+                }
+            });
